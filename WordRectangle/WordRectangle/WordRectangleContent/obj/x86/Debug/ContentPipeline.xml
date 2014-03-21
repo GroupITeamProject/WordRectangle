@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>MyFont.spritefont</Source>
+      <Name>MyFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\MyFont.xnb</Output>
+      <Time>2014-03-21T15:28:26.1111732+00:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangleContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangleContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-11-22T11:10:02.5955794+00:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
