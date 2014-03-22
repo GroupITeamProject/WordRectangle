@@ -18,7 +18,7 @@ namespace WordRectangle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteFont fonttype;
+        SpriteFont font;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -46,7 +46,7 @@ namespace WordRectangle
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            fonttype = Content.Load<SpriteFont>("MyFont");
+            font = Content.Load<SpriteFont>("MyFont");
 
             // TODO: use this.Content to load your game content here
         }
@@ -82,42 +82,48 @@ namespace WordRectangle
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            string s = "hello";
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
-            Rectangle outcomeBoundaries = new Rectangle(100,100,500,500); // 500x500 rectangle with top left at (100, 100)
-        string outcomeString = "White always wins!"; // 1984 reference ;)
-        MotiveUtil.DrawString(batch, fonttype, outcomeString, outcomeBoundaries);
+            
+            
+            string outcomeString = "Gavin is my name";
+            int strl = outcomeString.Length;
 
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin();
+            
+            Vector2 strsiz =  font.MeasureString(outcomeString);
+            int strx = (int)strsiz.X;
+            int stry = (int)strsiz.Y;
+            
+            Rectangle r = new Rectangle(10, 10, strx, stry);
+           
+            Game1.DrawRectangle(spriteBatch,r,Color.Red, 2);
+
+            spriteBatch.DrawString(font, outcomeString, new Vector2(10), Color.White);
+            
+           
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
-
-        static public void DrawString(SpriteBatch spriteBatch, SpriteFont font, string strToDraw, Rectangle boundaries)
+        
+        static Texture2D gTexture;
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int lineWidth)
         {
-            Vector2 size = font.MeasureString(strToDraw);
+            if (gTexture == null)
+            {
+                gTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+                gTexture.SetData<Color>(new Color[] { Color.White });
+            }
+            
 
-            float xScale = (boundaries.Width / size.X);
-            float yScale = (boundaries.Height / size.Y);
-
-            // Taking the smaller scaling value will result in the text always fitting in the boundaires.
-            float scale = Math.Min(xScale, yScale);
-
-            // Figure out the location to absolutely-center it in the boundaries rectangle.
-            int strWidth = (int)Math.Round(size.X * scale);
-            int strHeight = (int)Math.Round(size.Y * scale);
-            Vector2 position = new Vector2();
-            position.X = (((boundaries.Width - strWidth) / 2) + boundaries.X);
-            position.Y = (((boundaries.Height - strHeight) / 2) + boundaries.Y);
-
-            // A bunch of settings where we just want to use reasonable defaults.
-            float rotation = 0.0f;
-            Vector2 spriteOrigin = new Vector2(0, 0);
-            float spriteLayer = 0.0f; // all the way in the front
-            SpriteEffects spriteEffects = new SpriteEffects();
-
-            // Draw the string to the sprite batch!
-            spriteBatch.DrawString(font, strToDraw, position, Color.White, rotation, spriteOrigin, scale, spriteEffects, spriteLayer);
-        }
+           
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + lineWidth, lineWidth), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + lineWidth, lineWidth), color);
+            
+        }     
+        
     }
 }
