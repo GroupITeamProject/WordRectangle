@@ -19,6 +19,8 @@ namespace WordRectangle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        Color tcolor = Color.White;
+       
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,6 +69,18 @@ namespace WordRectangle
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //key board state set up for up and down keys
+             KeyboardState state = Keyboard.GetState();
+            //if up is pressed change to black
+             if (state.IsKeyDown(Keys.Up))
+             {
+                 tcolor = Color.Black;
+             }
+             //if down is pressed change to white
+             else if (state.IsKeyDown(Keys.Down))//if escape key is pressed 
+             {
+                 tcolor = Color.White;
+             }
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -83,45 +97,51 @@ namespace WordRectangle
         protected override void Draw(GameTime gameTime)
         {
             
-            
+            //string which will be passed in
             string outcomeString = "Gavin is my name";
-            int strl = outcomeString.Length;
+          
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
             
+            //vector2 which mesures the size of the string
             Vector2 strsiz =  font.MeasureString(outcomeString);
+            //x and y of vector cast to an int
             int strx = (int)strsiz.X;
             int stry = (int)strsiz.Y;
             
-            Rectangle r = new Rectangle(10, 10, strx, stry);
+            //new rectangle made with x and y of 10,10 and width of strx and height of stry
+            Rectangle rec = new Rectangle(10, 10, strx, stry);
            
-            Game1.DrawRectangle(spriteBatch,r,Color.Red, 2);
+            //method draw rectangle called passing in spritebatch, rectangle r, a color, and width of the line
+            Game1.DrawRectangle(spriteBatch,rec,Color.Red, 2);
 
-            spriteBatch.DrawString(font, outcomeString, new Vector2(10), Color.White);
-            
+            //string printed to the screen
+            spriteBatch.DrawString(font, outcomeString, new Vector2(10,10), tcolor);
+           
            
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
         
+        //static texture2d called gTexture
         static Texture2D gTexture;
-        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int lineWidth)
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int WidthofLine)
         {
             if (gTexture == null)
             {
                 gTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
                 gTexture.SetData<Color>(new Color[] { Color.White });
             }
-            
 
-           
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + lineWidth, lineWidth), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + lineWidth, lineWidth), color);
+
+            //draws 4 lines to make up rectangle
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + WidthofLine, WidthofLine), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + WidthofLine, WidthofLine), color);
             
         }     
         
