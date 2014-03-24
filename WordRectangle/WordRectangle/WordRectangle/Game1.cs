@@ -20,6 +20,7 @@ namespace WordRectangle
         SpriteBatch spriteBatch;
         SpriteFont font;
         Color tcolor = Color.White;
+        Color bcolor = Color.CornflowerBlue;
        
         public Game1()
         {
@@ -81,6 +82,14 @@ namespace WordRectangle
              {
                  tcolor = Color.White;
              }
+             else if (state.IsKeyDown(Keys.Left))//if escape key is pressed 
+             {
+                 bcolor = Color.CornflowerBlue;
+             }
+             else if (state.IsKeyDown(Keys.Right))//if escape key is pressed 
+             {
+                 bcolor = Color.Green;
+             }
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -101,7 +110,7 @@ namespace WordRectangle
             string outcomeString = "Gavin is my name";
           
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(bcolor);
 
             spriteBatch.Begin();
             
@@ -116,9 +125,11 @@ namespace WordRectangle
            
             //method draw rectangle called passing in spritebatch, rectangle r, a color, and width of the line
             Game1.DrawRectangle(spriteBatch,rec,Color.Red, 2);
+            Game1.DrawRectangle(spriteBatch, rec, Color.Red, 2);
 
             //string printed to the screen
             spriteBatch.DrawString(font, outcomeString, new Vector2(10,10), tcolor);
+            spriteBatch.DrawString(font, "sideways", new Vector2(100, 150), tcolor, (float)(Math.PI / 2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
            
            
             spriteBatch.End();
@@ -144,6 +155,7 @@ namespace WordRectangle
             spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + WidthofLine, WidthofLine), color);
             
         }     
+        
         
     }
 }
