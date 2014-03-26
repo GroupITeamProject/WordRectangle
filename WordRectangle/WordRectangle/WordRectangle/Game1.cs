@@ -108,6 +108,10 @@ namespace WordRectangle
             
             //string which will be passed in
             string outcomeString = "Gavin is my name";
+            string outcomeString2 = "Ninety";
+            string outcomeString3 = "Two Seventy";
+            string outcomeString4 = "Diagonal";
+
           
 
             GraphicsDevice.Clear(bcolor);
@@ -119,18 +123,25 @@ namespace WordRectangle
             //x and y of vector cast to an int
             int strx = (int)strsiz.X;
             int stry = (int)strsiz.Y;
+            Vector2 strsiz2 = font.MeasureString(outcomeString2);
+            //x and y of vector cast to an int
+            int strx2 = (int)strsiz2.X;
+            int stry2 = (int)strsiz2.Y;
             
             //new rectangle made with x and y of 10,10 and width of strx and height of stry
             Rectangle rec = new Rectangle(10, 10, strx, stry);
            
+
             //method draw rectangle called passing in spritebatch, rectangle r, a color, and width of the line
-            Game1.DrawRectangle(spriteBatch,rec,Color.Red, 2);
-            Game1.DrawRectangle(spriteBatch, rec, Color.Red, 2);
+            Game1.DrawRectangle(spriteBatch,rec,Color.Red, 2,0.0f);
+            
 
             //string printed to the screen
             spriteBatch.DrawString(font, outcomeString, new Vector2(10,10), tcolor);
-            spriteBatch.DrawString(font, "sideways", new Vector2(100, 150), tcolor, (float)(Math.PI / 2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString2, new Vector2(100, 150), tcolor, (float)(Math.PI / 2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
            
+            spriteBatch.DrawString(font, outcomeString3, new Vector2(700, 430), tcolor, (float)(Math.PI / -2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString4, new Vector2(400, 250), tcolor, (float)(Math.PI / 4), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
            
             spriteBatch.End();
 
@@ -139,7 +150,7 @@ namespace WordRectangle
         
         //static texture2d called gTexture
         static Texture2D gTexture;
-        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int WidthofLine)
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int WidthofLine, float rot)
         {
             if (gTexture == null)
             {
@@ -149,12 +160,13 @@ namespace WordRectangle
 
 
             //draws 4 lines to make up rectangle
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + WidthofLine, WidthofLine), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), color);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + WidthofLine, WidthofLine), color);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + WidthofLine, WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + WidthofLine, WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
             
-        }     
+        }
+         
         
         
     }
