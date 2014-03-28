@@ -8,7 +8,16 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\MyFont.xnb</Output>
-      <Time>2014-03-24T00:57:34.3035583+00:00</Time>
+      <Time>2014-03-26T13:54:26.4141265+00:00</Time>
+    </Item>
+    <Item>
+      <Source>MyFont2.spritefont</Source>
+      <Name>MyFont2</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\MyFont2.xnb</Output>
+      <Time>2014-03-27T14:53:59.425264+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -19,8 +19,10 @@ namespace WordRectangle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        SpriteFont font2;
         Color tcolor = Color.White;
         Color bcolor = Color.CornflowerBlue;
+        Rectangle rec;
        
         public Game1()
         {
@@ -50,6 +52,7 @@ namespace WordRectangle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("MyFont");
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,6 +73,32 @@ namespace WordRectangle
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            this.IsMouseVisible = true;
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+           
+            if (rec.Contains(mousePosition))
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+
+                    font = Content.Load<SpriteFont>("MyFont2");
+
+                }
+                else
+                {
+                    font = Content.Load<SpriteFont>("MyFont");
+                }
+                /*
+                if (mouseState.RightButton == ButtonState.Pressed)
+                {
+
+                    font = Content.Load<SpriteFont>("MyFont");
+
+                }*/
+               
+            }
+       
             //key board state set up for up and down keys
              KeyboardState state = Keyboard.GetState();
             //if up is pressed change to black
@@ -107,10 +136,11 @@ namespace WordRectangle
         {
             
             //string which will be passed in
-            string outcomeString = "Gavin is my name";
+            string outcomeString = "Normal";
             string outcomeString2 = "Ninety";
             string outcomeString3 = "Two Seventy";
             string outcomeString4 = "Diagonal";
+            string outcomeString5 = "Upside down";
 
           
 
@@ -127,22 +157,27 @@ namespace WordRectangle
             //x and y of vector cast to an int
             int strx2 = (int)strsiz2.X;
             int stry2 = (int)strsiz2.Y;
+            Vector2 strsiz3 = font.MeasureString(outcomeString4);
+            //x and y of vector cast to an int
+            int strx3 = (int)strsiz3.X;
+            int stry3 = (int)strsiz3.Y;
             
             //new rectangle made with x and y of 10,10 and width of strx and height of stry
-            Rectangle rec = new Rectangle(10, 10, strx, stry);
-           
+           rec = new Rectangle(10, 10, strx, stry);
+           Rectangle rec2 = new Rectangle(100, 150, strx2, stry2);
+           Rectangle rec3 = new Rectangle(400, 150, strx3, stry3);
 
             //method draw rectangle called passing in spritebatch, rectangle r, a color, and width of the line
-            Game1.DrawRectangle(spriteBatch,rec,Color.Red, 2,0.0f);
-            
+            Game1.DrawRectangle(spriteBatch,rec,Color.Transparent, 0.0f);
+            Game1.DrawRectangle(spriteBatch, rec2, Color.Red, (float)Math.PI / 2);
+            Game1.DrawRectangle(spriteBatch, rec3, Color.Red, (float)Math.PI / 4);
 
             //string printed to the screen
-            spriteBatch.DrawString(font, outcomeString, new Vector2(10,10), tcolor);
-            spriteBatch.DrawString(font, outcomeString2, new Vector2(100, 150), tcolor, (float)(Math.PI / 2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
-           
-            spriteBatch.DrawString(font, outcomeString3, new Vector2(700, 430), tcolor, (float)(Math.PI / -2), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(font, outcomeString4, new Vector2(400, 250), tcolor, (float)(Math.PI / 4), new Vector2(32, 19), 1.0f, SpriteEffects.None, 0.5f);
-           
+            spriteBatch.DrawString(font, outcomeString, new Vector2(10, 10), tcolor, 0.0f, new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString2, new Vector2(100, 150), tcolor, (float)(Math.PI / 2), new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString3, new Vector2(700, 430), tcolor, (float)(Math.PI / -2), new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString4, new Vector2(400, 150), tcolor, (float)(Math.PI / 4), new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, outcomeString5, new Vector2(500, 470), tcolor, (float)(Math.PI ), new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -150,7 +185,7 @@ namespace WordRectangle
         
         //static texture2d called gTexture
         static Texture2D gTexture;
-        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int WidthofLine, float rot)
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, float rot)
         {
             if (gTexture == null)
             {
@@ -158,15 +193,10 @@ namespace WordRectangle
                 gTexture.SetData<Color>(new Color[] { Color.White });
             }
 
-
-            //draws 4 lines to make up rectangle
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + WidthofLine, WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, WidthofLine, rectangle.Height + WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
-            spriteBatch.Draw(gTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + WidthofLine, WidthofLine), null, color, rot, new Vector2(), SpriteEffects.None, 0.0f);
-            
+            spriteBatch.Draw(gTexture, rectangle, null,color,rot, new Vector2(),SpriteEffects.None,0.0f);
+          
         }
-         
+       
         
         
     }

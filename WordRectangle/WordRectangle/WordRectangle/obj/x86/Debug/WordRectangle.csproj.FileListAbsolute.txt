@@ -5,3 +5,4 @@ C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRect
 C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\obj\x86\Debug\WordRectangle.exe
 C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\obj\x86\Debug\WordRectangle.pdb
 C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\MyFont.xnb
+C:\Users\Gavin\Dropbox\Group I Project\Code\WordRectangle\WordRectangle\WordRectangle\WordRectangle\WordRectangle\bin\x86\Debug\Content\MyFont2.xnb
