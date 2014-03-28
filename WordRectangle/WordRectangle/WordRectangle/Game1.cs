@@ -76,27 +76,25 @@ namespace WordRectangle
             this.IsMouseVisible = true;
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
-           
+            if (rec.Contains(mousePosition))
+            {
+                tcolor = Color.PaleGoldenrod;
+            }
             if (rec.Contains(mousePosition))
             {
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
                     font = Content.Load<SpriteFont>("MyFont2");
+                  
+                }
 
-                }
-                else
-                {
-                    font = Content.Load<SpriteFont>("MyFont");
-                }
-                /*
                 if (mouseState.RightButton == ButtonState.Pressed)
                 {
 
                     font = Content.Load<SpriteFont>("MyFont");
 
-                }*/
-               
+                }
             }
        
             //key board state set up for up and down keys
